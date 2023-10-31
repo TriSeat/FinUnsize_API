@@ -1,7 +1,7 @@
 package finunsize.finunsizeapi.integration.auth.token;
 
-import finunsize.finunsizeapi.persistence.repository.user.LocalUserRepository;
-import finunsize.finunsizeapi.persistence.repository.user.PlanUserRepository;
+import finunsize.finunsizeapi.persistence.repository.user.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,14 +19,12 @@ import java.io.IOException;
 public class TokenChain extends OncePerRequestFilter {
 
     private final TokenService tokenService;
-    private final  PlanUserRepository planUserRepository;
-    private final LocalUserRepository localUserRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public TokenChain (TokenService tokenService, PlanUserRepository planUserRepository, LocalUserRepository localUserRepository) {
+    public TokenChain (TokenService tokenService, UserRepository userRepository) {
         this.tokenService = tokenService;
-        this.planUserRepository = planUserRepository;
-        this.localUserRepository = localUserRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -34,7 +32,7 @@ public class TokenChain extends OncePerRequestFilter {
         String token = this.saveToken(request);
 
         String username = tokenService.confirmToken(token);
-        UserDetails user = findUser(username);
+        UserDetails user = userRepository.findByLogin(username);
 
         if (user != null) {
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
@@ -48,13 +46,5 @@ public class TokenChain extends OncePerRequestFilter {
         var authHeader = request.getHeader("Authorization");
         if (authHeader == null) return null;
         return authHeader.replace("Bearer ", "");
-    }
-
-    private UserDetails findUser(String username) {
-        UserDetails user = localUserRepository.findByNome(username);
-        if (user == null) {
-            user = planUserRepository.findByNome(username);
-        }
-        return user;
     }
 }
