@@ -1,13 +1,18 @@
-package finunsize.finunsizeapi.business.dto.user.local;
+package finunsize.finunsizeapi.business.dto.user.plan;
 
 import finunsize.finunsizeapi.persistence.model.user.Role;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record LocalUserSign (
+public record UserSign(
         @NotBlank @Size(max = 50) String nome,
+        @NotBlank @Size(max = 70) String login,
         @NotBlank String password,
         @NotBlank @Size(max = 50) String email,
-        Role Role,
+        int telefone,
+        int cep,
+        boolean plano_padrao,
+        Role role,
+        @NotBlank String cnpj,
         String url_image
 ) {}
