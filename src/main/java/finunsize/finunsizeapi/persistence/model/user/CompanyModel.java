@@ -1,4 +1,4 @@
-package finunsize.finunsizeapi.persistence.model.user.company;
+package finunsize.finunsizeapi.persistence.model.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

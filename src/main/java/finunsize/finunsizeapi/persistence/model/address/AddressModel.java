@@ -1,6 +1,5 @@
 package finunsize.finunsizeapi.persistence.model.address;
 
-import finunsize.finunsizeapi.persistence.model.user.company.CompanyModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Getter

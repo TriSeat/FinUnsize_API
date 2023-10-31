@@ -2,7 +2,6 @@ package finunsize.finunsizeapi.persistence.model.purchase;
 
 import finunsize.finunsizeapi.persistence.model.payment.PaymentModel;
 import finunsize.finunsizeapi.persistence.model.product.SupplierModel;
-import finunsize.finunsizeapi.persistence.model.user.company.CompanyModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,5 @@
 package finunsize.finunsizeapi.persistence.model.cashier;
 
-import finunsize.finunsizeapi.persistence.model.user.company.CompanyModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

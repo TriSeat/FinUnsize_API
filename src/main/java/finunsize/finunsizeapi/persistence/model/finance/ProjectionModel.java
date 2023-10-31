@@ -1,6 +1,5 @@
 package finunsize.finunsizeapi.persistence.model.finance;
 
-import finunsize.finunsizeapi.persistence.model.user.company.CompanyModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

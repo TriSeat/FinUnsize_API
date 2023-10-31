@@ -1,7 +1,6 @@
 package finunsize.finunsizeapi.persistence.model.sale;
 
 import finunsize.finunsizeapi.persistence.model.product.ProductModel;
-import finunsize.finunsizeapi.persistence.model.user.company.CompanyModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

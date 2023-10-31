@@ -1,8 +1,5 @@
-package finunsize.finunsizeapi.persistence.model.user.plan;
+package finunsize.finunsizeapi.persistence.model.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import finunsize.finunsizeapi.persistence.model.user.Role;
-import finunsize.finunsizeapi.persistence.model.user.company.CompanyModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,8 +19,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="PlanoUsuario")
-public class PlanUserModel implements UserDetails, Serializable {
+@Table(name="Usuario")
+public class UserModel implements UserDetails, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,8 +28,11 @@ public class PlanUserModel implements UserDetails, Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 150)
     private String nome;
+
+    @Column(nullable = false, length = 70, unique = true)
+    private String login;
 
     @Column(nullable = false)
     private String password;
@@ -54,19 +54,19 @@ public class PlanUserModel implements UserDetails, Serializable {
 
     private String url_image;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn( name = "cnpj", referencedColumnName = "cnpj", nullable = false)
     private CompanyModel cnpj;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == Role.MANAGER) return List.of(new SimpleGrantedAuthority("PLAN_USER"), new SimpleGrantedAuthority("MANAGER"));
+        if(this.role == Role.MANAGER) return List.of(new SimpleGrantedAuthority("GERENTE"), new SimpleGrantedAuthority("CAIXA"));
         return List.of(new SimpleGrantedAuthority("MANAGER"));
     }
 
     @Override
     public String getUsername() {
-        return this.nome;
+        return this.login;
     }
 
     @Override

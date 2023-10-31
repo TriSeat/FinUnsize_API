@@ -2,9 +2,8 @@ package finunsize.finunsizeapi.persistence.model.user;
 
 public enum Role {
 
-    ADMIN_PLAN("Admin"),
-    CASHIER("caixa"),
-    MANAGER("gerente");
+    MANAGER("GERENTE"),
+    CASHIER("CAIXA");
 
     private String role;
 

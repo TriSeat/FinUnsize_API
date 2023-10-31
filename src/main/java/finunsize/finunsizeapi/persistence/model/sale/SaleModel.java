@@ -2,8 +2,6 @@ package finunsize.finunsizeapi.persistence.model.sale;
 
 import finunsize.finunsizeapi.persistence.model.cashier.CashierModel;
 import finunsize.finunsizeapi.persistence.model.payment.PaymentModel;
-import finunsize.finunsizeapi.persistence.model.product.ProductModel;
-import finunsize.finunsizeapi.persistence.model.user.company.CompanyModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +13,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
