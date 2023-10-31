@@ -1,4 +1,4 @@
-package finunsize.finunsizeapi.business.dto.user.plan;
+package finunsize.finunsizeapi.business.dto.user.main;
 
 import finunsize.finunsizeapi.persistence.model.user.Role;
 import jakarta.validation.constraints.NotBlank;
