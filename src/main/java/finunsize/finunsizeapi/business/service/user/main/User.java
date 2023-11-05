@@ -1,7 +1,7 @@
 package finunsize.finunsizeapi.business.service.user.main;
 
 import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullException;
-import finunsize.finunsizeapi.business.configuration.handler.user.EntityAlreadyExistsException;
+import finunsize.finunsizeapi.business.configuration.handler.EntityAlreadyExistsException;
 import finunsize.finunsizeapi.business.dto.user.main.UserResponse;
 import finunsize.finunsizeapi.business.dto.user.main.UserSign;
 import finunsize.finunsizeapi.business.dto.user.main.UserUpdate;
@@ -105,13 +105,13 @@ public class User implements UserDetailsService, UserService {
     @Override
     public void deleteUser(UUID id) {
         UserModel existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Usuário contendo este id não foi encontrado: " + id));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Usuário contendo este id: %s não foi encontrado: ", id)));
         userRepository.delete(existingUser);
     }
 
     private void validUser(String login, String email) {
         if (userRepository.existsByLogin(login) || userRepository.existsByEmail(email)) {
-            throw new EntityAlreadyExistsException("Login ou email já existem", login +" " + email);
+            throw new EntityAlreadyExistsException(String.format("Login: %s ou email: %s já existem", login , email));
         }
     }
 
@@ -122,7 +122,7 @@ public class User implements UserDetailsService, UserService {
     }
 
     private void insertCompany(UserModel userModel, String cnpj) {
-        var company = companyRepository.findByCnpj(cnpj);
+        var company = companyRepository.findCnpjByCnpj(cnpj);
         userModel.setCnpj(company);
     }
 }
