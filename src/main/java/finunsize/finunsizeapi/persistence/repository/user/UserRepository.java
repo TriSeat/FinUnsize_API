@@ -17,16 +17,7 @@ public interface UserRepository extends JpaRepository <UserModel, UUID> {
     UserDetails findByLogin(String login);
     Optional<UserModel> findByNomeAndCnpj_Cnpj(String login, String cnpj);
     boolean existsByNome(String name);
-    boolean existsByEmail(String email);
-
-    @Query(value = "SELECT * FROM plano_usuario p WHERE p.cnpj = :cnpj", nativeQuery = true)
-    Optional<UserModel> findByCnpj(String cnpj);
-
+    boolean existsByEmail(String email);;
     Optional<UserModel> findById(UUID id);
-
-    boolean existsByNomeAndCnpj_CnpjNot(String nome, String cnpj);;
-
-    boolean existsByEmailAndCnpj_CnpjNot(String email, String cnpj);
-
     boolean existsByLogin(String login);
 }

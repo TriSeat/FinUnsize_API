@@ -60,8 +60,13 @@ public class UserModel implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == Role.MANAGER) return List.of(new SimpleGrantedAuthority("GERENTE"), new SimpleGrantedAuthority("CAIXA"));
-        return List.of(new SimpleGrantedAuthority("MANAGER"));
+        if (this.role == Role.SERVICE) {
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_SERVICE"),
+                    new SimpleGrantedAuthority("ROLE_MANAGER"),
+                    new SimpleGrantedAuthority("ROLE_CASHIER")
+            );
+        } else return List.of(new SimpleGrantedAuthority("ROLE_MANAGER"));
     }
 
     @Override

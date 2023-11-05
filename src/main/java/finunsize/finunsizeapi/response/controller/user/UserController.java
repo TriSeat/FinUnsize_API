@@ -49,7 +49,7 @@ public class UserController {
     @PostMapping("signup")
     public ResponseEntity sign(@RequestBody @Valid UserSign planUserSignDTO) {
         userService.signUp(planUserSignDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body("User created");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Usuário Criado");
     }
 
     @GetMapping("list")
@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @GetMapping("credentials")
-    public ResponseEntity<UserResponse> credentils() throws ContextNullException {
+    public ResponseEntity<UserResponse> credentials() throws ContextNullException {
         var user = userService.findLogin();
         return ResponseEntity.ok(user);
     }
