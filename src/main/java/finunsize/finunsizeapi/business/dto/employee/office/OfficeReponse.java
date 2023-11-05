@@ -1,4 +1,4 @@
-package finunsize.finunsizeapi.business.dto.employee;
+package finunsize.finunsizeapi.business.dto.employee.office;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
