@@ -2,16 +2,23 @@ package finunsize.finunsizeapi.integration.auth;
 
 import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullException;
 import finunsize.finunsizeapi.persistence.model.user.UserModel;
+import finunsize.finunsizeapi.persistence.repository.user.CompanyRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
-import java.util.concurrent.CompletionException;
 
 @Service
 public class UserSession {
+
+    private final CompanyRepository companyRepository;
+
+    public UserSession(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
+    }
 
     private Authentication getAuthentication() throws ContextNullException {
         SecurityContext context = SecurityContextHolder.getContext();
