@@ -14,8 +14,6 @@ public interface UserService {
     UserModel updateUser(UUID id, UserUpdate planUserUpdate);
     void deleteUser(UUID id);
     UserResponse findLogin() throws ContextNullException;
-
     UserResponse findUser(String username) throws ContextNullException;
-
     List<UserResponse> listUser() throws ContextNullException;
 }
