@@ -19,7 +19,7 @@ public class AddressModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 9)
     private int cep;
 
@@ -29,7 +29,9 @@ public class AddressModel implements Serializable {
     @Column(nullable = false)
     private String numero;
 
+    @Column(length = 10)
     private String complemento;
+
     @Column(length = 150)
     private String referencia;
 
