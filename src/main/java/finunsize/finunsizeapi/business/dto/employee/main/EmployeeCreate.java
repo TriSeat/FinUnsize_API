@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
-public record EmployeeReponse(
+public record EmployeeCreate(
         @NotBlank @Size(max = 100) String nome,
         @NotBlank @Size(max = 50) String cargo,
         @NotBlank @Size(max = 20) String turno,
