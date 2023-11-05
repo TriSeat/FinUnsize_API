@@ -21,7 +21,7 @@ public class CompanyModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(length = 14, columnDefinition = "CHAR(14)")
+    @Column(length = 14, columnDefinition = "CHAR(18)")
     private String cnpj;
 
     @Column(nullable = false, length = 100)
@@ -46,7 +46,10 @@ public class CompanyModel implements Serializable {
     private BigDecimal despesa_media;
 
     @Column(nullable = false, length = 100)
-    private String razao_social;
+    private String razao;
 
     private String url_image;
+
+    @Column(columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean inativo = false;
 }
