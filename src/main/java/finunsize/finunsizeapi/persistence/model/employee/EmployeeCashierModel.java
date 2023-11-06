@@ -30,6 +30,6 @@ public class EmployeeCashierModel implements Serializable {
     @JoinColumn(name = "id_funcionario")
     private EmployeeModel id_funcionario;
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 }

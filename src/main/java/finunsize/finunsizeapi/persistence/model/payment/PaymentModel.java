@@ -25,6 +25,6 @@ public class PaymentModel implements Serializable {
     @Column(nullable = false, length = 70)
     private String nome;
 
-    @Column(length = 14, columnDefinition = "CHAR(14)")
+    @Column(nullable = false, length = 14, columnDefinition = "CHAR(14)")
     private String cnpj;
 }

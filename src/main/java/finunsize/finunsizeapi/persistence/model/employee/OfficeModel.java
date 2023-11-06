@@ -27,7 +27,7 @@ public class OfficeModel implements Serializable {
     @Column(length = 150)
     private String descricao;
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 
 }

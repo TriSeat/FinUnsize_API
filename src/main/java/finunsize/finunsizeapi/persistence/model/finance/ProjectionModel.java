@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -40,11 +39,10 @@ public class ProjectionModel implements Serializable {
     @Column(nullable = false, length = 150)
     private String descricao;
 
-    @DateTimeFormat(pattern = "dd-MM-yyy")
     @Column(nullable = false)
-    private LocalDateTime data;
+    private LocalDate data;
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 
 }

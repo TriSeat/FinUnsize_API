@@ -1,12 +1,10 @@
 package finunsize.finunsizeapi.persistence.model.address;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -19,7 +17,9 @@ public class AddressModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id_logradouro;
+
     @Column(length = 9)
     private int cep;
 
@@ -37,7 +37,4 @@ public class AddressModel implements Serializable {
 
     @Column(nullable = false, length = 100)
     private String cidade;
-
-    @Column(length = 14, columnDefinition = "CHAR(14)")
-    private String cnpj;
 }

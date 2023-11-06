@@ -39,7 +39,6 @@ public class PurchaseModel implements Serializable {
     @Column(nullable = false)
     private BigDecimal preco_total;
 
-    @DateTimeFormat(pattern = "dd-MM-yyy HH:mm:ss")
     @Column(nullable = false)
     private LocalDateTime data;
 
@@ -50,6 +49,6 @@ public class PurchaseModel implements Serializable {
     @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PurchaseItemModel> purchase_item = new ArrayList<>();
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 }

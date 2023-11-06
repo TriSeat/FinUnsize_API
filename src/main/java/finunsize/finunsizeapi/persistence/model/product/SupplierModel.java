@@ -35,6 +35,6 @@ public class SupplierModel implements Serializable {
 
     private String url_image;
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 }

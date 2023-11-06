@@ -28,6 +28,6 @@ public class CashierModel implements Serializable {
     @Column(nullable = false, length = 10)
     private String status;
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 }

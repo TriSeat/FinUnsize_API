@@ -43,13 +43,12 @@ public class SaleModel implements Serializable {
     @JoinColumn(name = "id_pagamento", nullable = false)
     private PaymentModel pagamento;
 
-    @DateTimeFormat(pattern = "dd-MM-yyy HH:mm:ss")
     @Column(nullable = false)
     private LocalDateTime data;
 
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SaleItemModel>  saleItemModels = new ArrayList<>();
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 }

@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -33,9 +32,8 @@ public class ProductModel implements Serializable {
     @JoinColumn(name = "id_item_produto")
     private InfoProductModel informacoes;
 
-    @DateTimeFormat(pattern = "dd-MM-yyy")
     @Column(nullable = false)
-    private LocalDateTime validade;
+    private LocalDate validade;
 
     @Column(nullable = false, length = 150)
     private String descricao;
@@ -46,12 +44,11 @@ public class ProductModel implements Serializable {
     @Column(nullable = false)
     private BigDecimal atacado;
 
-    @DateTimeFormat(pattern = "dd-MM-yyy")
     @Column(nullable = false)
-    private LocalDateTime data_cadastro;
+    private LocalDate data_cadastro;
 
     private String url_image;
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 }

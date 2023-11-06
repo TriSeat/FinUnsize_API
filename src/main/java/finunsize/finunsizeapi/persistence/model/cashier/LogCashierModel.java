@@ -29,7 +29,6 @@ public class LogCashierModel implements Serializable {
     @JoinColumn(name = "id_caixa", nullable = false)
     private CashierModel id_caixa;
 
-    @DateTimeFormat(pattern = "dd-MM-yyy")
     private LocalDateTime data_funcionamento;
 
     @Column(nullable = false)
@@ -44,7 +43,7 @@ public class LogCashierModel implements Serializable {
     @DateTimeFormat(pattern = "HH:mm:ss")
     private LocalDateTime fechamento;
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 
 }

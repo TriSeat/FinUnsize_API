@@ -6,12 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
@@ -26,6 +24,9 @@ public class EmployeeModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_funcionario;
 
+    @Column(nullable = false, unique = true, columnDefinition = "CHAR(14)")
+    private String cpf;
+
     @Column(nullable = false, length = 100)
     private String nome;
 
@@ -39,13 +40,12 @@ public class EmployeeModel implements Serializable {
     @Column(nullable = false)
     private int telefone;
 
-    @DateTimeFormat(pattern = "dd-MM-yyy")
     @Column(nullable = false)
-    private LocalDateTime admissao;
+    private LocalDate admissao;
 
     @OneToOne (optional = false)
-    @JoinColumn(name = "id_endereco")
-    private AddressModel id_endereco;
+    @JoinColumn(name = "id_logradouro")
+    private AddressModel id_logradouro;
 
     @Column(nullable = false)
     private BigDecimal salario;
@@ -53,12 +53,10 @@ public class EmployeeModel implements Serializable {
     @Column(length = 150)
     private String observacao;
 
-    @Column(columnDefinition = "VARCHAR(8) DEFAULT 'admitido'")
-    private String status;
+    private boolean demitido;
 
-    @Column(nullable = false)
     private String url_image;
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 }

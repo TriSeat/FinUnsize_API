@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -31,11 +30,10 @@ public class ExpanseModel implements Serializable {
     @Column(nullable = false)
     private BigDecimal valor;
 
-    @DateTimeFormat(pattern = "dd-MM-yyy")
-    private LocalDateTime data_vencimento;
+    private LocalDate data_vencimento;
 
-    @DateTimeFormat(pattern = "dd-MM-yyy")
-    private LocalDateTime data_pagamento;
+
+    private LocalDate data_pagamento;
 
     @ManyToOne (optional = false)
     @JoinColumn(name = "id")
@@ -47,7 +45,7 @@ public class ExpanseModel implements Serializable {
     @Column(nullable = false)
     private boolean aberto;
 
-    @Column(length = 18, columnDefinition = "CHAR(18)")
+    @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 
 }
