@@ -1,5 +1,5 @@
 # Use a base image with Java 17 installed
-FROM adoptopenjdk:17-jdk-hotspot as build
+FROM openjdk:17-oracle
 
 # Set the working directory in the container
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Use a base image with Java 17 installed
-FROM adoptopenjdk:17-jre-hotspot
+FROM openjdk:17-oracle
 
 # Set the working directory in the container
 WORKDIR /app
