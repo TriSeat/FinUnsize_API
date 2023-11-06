@@ -16,7 +16,6 @@ public interface UserRepository extends JpaRepository <UserModel, UUID> {
     List<UserModel> findAllByCnpj_Cnpj(String cnpj);
     UserDetails findByLogin(String login);
     Optional<UserModel> findByNomeAndCnpj_Cnpj(String login, String cnpj);
-    boolean existsByNome(String name);
     boolean existsByEmail(String email);;
     Optional<UserModel> findById(UUID id);
     boolean existsByLogin(String login);
