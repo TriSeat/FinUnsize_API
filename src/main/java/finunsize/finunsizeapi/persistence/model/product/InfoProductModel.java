@@ -30,7 +30,4 @@ public class InfoProductModel implements Serializable {
 
     @Column(nullable = false, length = 90)
     private String tipo;
-
-    @Column(length = 14, columnDefinition = "CHAR(14)")
-    private String cnpj;
 }

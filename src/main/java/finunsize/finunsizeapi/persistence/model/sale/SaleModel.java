@@ -50,6 +50,6 @@ public class SaleModel implements Serializable {
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SaleItemModel>  saleItemModels = new ArrayList<>();
 
-    @Column(length = 14, columnDefinition = "CHAR(14)")
+    @Column(length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 }

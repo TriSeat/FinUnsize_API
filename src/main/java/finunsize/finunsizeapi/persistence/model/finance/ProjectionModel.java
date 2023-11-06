@@ -44,7 +44,7 @@ public class ProjectionModel implements Serializable {
     @Column(nullable = false)
     private LocalDateTime data;
 
-    @Column(length = 14, columnDefinition = "CHAR(14)")
+    @Column(length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 
 }

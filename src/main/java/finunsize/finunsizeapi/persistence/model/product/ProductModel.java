@@ -52,6 +52,6 @@ public class ProductModel implements Serializable {
 
     private String url_image;
 
-    @Column(length = 14, columnDefinition = "CHAR(14)")
+    @Column(length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 }

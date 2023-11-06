@@ -28,6 +28,6 @@ public class TypeExpanseModel implements Serializable {
     @Column(length = 150)
     private String descicao;
 
-    @Column(length = 14, columnDefinition = "CHAR(14)")
+    @Column(length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 }

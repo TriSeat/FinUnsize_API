@@ -44,7 +44,7 @@ public class LogCashierModel implements Serializable {
     @DateTimeFormat(pattern = "HH:mm:ss")
     private LocalDateTime fechamento;
 
-    @Column(length = 14, columnDefinition = "CHAR(14)")
+    @Column(length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;
 
 }
