@@ -1,6 +1,8 @@
 # Use a base image with Java 17 installed
 FROM openjdk:17-jdk-slim AS build
 
+RUN apt-get update && apt-get install -y maven
+
 # Set the working directory in the container
 WORKDIR /app
 
