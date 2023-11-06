@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @GetMapping("find/{username}")
-    public  ResponseEntity<UserResponse> findUser(@PathVariable String username) throws ContextNullException {
+    public ResponseEntity<UserResponse> findUser(@PathVariable String username) throws ContextNullException {
         var user = userService.findUser(username);
         return ResponseEntity.ok(user);
     }
