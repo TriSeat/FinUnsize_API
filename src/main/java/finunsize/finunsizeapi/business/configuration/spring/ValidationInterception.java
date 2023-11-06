@@ -13,26 +13,26 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ValidationInterception extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        Map<String, Object> response = new HashMap<>();
         Instant timestamp = Instant.now();
 
-        response.put("timestamp", timestamp);
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse.put("timestamp", timestamp);
 
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String message = error.getDefaultMessage();
-            errors.put(fieldName, message);
-        });
+        Map<String, String> errors = ex.getBindingResult().getAllErrors().stream()
+                .collect(Collectors.toMap(
+                        error -> ((FieldError) error).getField(),
+                        error -> error.getDefaultMessage()
+                ));
 
-        response.put("erros", errors);
+        errorResponse.put("errors", errors);
 
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }
