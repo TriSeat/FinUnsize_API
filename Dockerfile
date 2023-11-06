@@ -23,7 +23,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR file from the previous stage
-COPY --from=build /app/target/finunsize.jar .
+COPY --from=build /app/target/finunsizeapi.jar .
 
 # Copy the .env file
 COPY .env .
@@ -32,4 +32,4 @@ COPY .env .
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "finunsize.jar"]
+CMD ["java", "-jar", "finunsizeapi.jar"]
