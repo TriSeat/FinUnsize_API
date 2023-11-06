@@ -1,16 +1,33 @@
-# Use a imagem oficial do OpenJDK como base
-FROM openjdk:17-oracle
+# Use a base image with Java 17 installed
+FROM adoptopenjdk:17-jdk-hotspot as build
 
-# Diretório de trabalho no contêiner
+# Set the working directory in the container
 WORKDIR /app
 
-# Copie o arquivo JAR da sua aplicação para o contêiner
-COPY target/finunsizeapi.jar finunsizeapi.jar
+# Copy the pom.xml and download the dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
 
-COPY finunsizeapi/.env .env
+# Copy the source code
+COPY src ./src
 
-# Porta que a aplicação Spring Boot está configurada para escutar
+# Build the application
+RUN mvn package -DskipTests
+
+# Use a base image with Java 17 installed
+FROM adoptopenjdk:17-jre-hotspot
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the built JAR file from the previous stage
+COPY --from=build /app/target/finunsize.jar .
+
+# Copy the .env file
+COPY .env .
+
+# Expose the port that the application listens on
 EXPOSE 8080
 
-# Comando para iniciar a aplicação quando o contêiner for iniciado
-CMD ["java", "-jar", "finunsizeapi.jar"]
+# Run the application
+CMD ["java", "-jar", "finunsize.jar"]
