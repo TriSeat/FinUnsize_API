@@ -1,5 +1,5 @@
 # Use a base image with Java 17 installed
-FROM openjdk:17-oracle
+FROM openjdk:17-jdk-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Use a base image with Java 17 installed
-FROM openjdk:17-oracle
+FROM openjdk:17-jdk-slim
 
 # Set the working directory in the container
 WORKDIR /app
