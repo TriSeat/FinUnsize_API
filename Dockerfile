@@ -23,7 +23,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR file from the previous stage
-COPY --from=build finunsizeapi.jar .
+COPY --from=build finunsizeapi-0.0.1-SNAPSHOT.jar .
 
 # Copy the .env file
 COPY .env .
