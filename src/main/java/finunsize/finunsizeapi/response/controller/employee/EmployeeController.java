@@ -30,7 +30,7 @@ public class EmployeeController {
     }
 
     @GetMapping("find/{cpf}")
-    public ResponseEntity<EmployeeResponse> find(@PathVariable String cpf) {
+    public ResponseEntity<EmployeeResponse> find(@PathVariable String cpf) throws ContextNullException {
         return ResponseEntity.ok(employeeService.find(cpf));
     }
 
@@ -39,14 +39,14 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.list());
     }
 
-    @PutMapping("update/{cpf}/id")
-    public ResponseEntity update(@PathVariable String cpf, @PathVariable UUID id, @RequestBody @Valid EmployeeUpdate employeeUpdate) {
-        employeeService.update(cpf, id, employeeUpdate);
+    @PutMapping("update/{cpf}")
+    public ResponseEntity update(@PathVariable String cpf, @RequestBody @Valid EmployeeUpdate employeeUpdate) throws ContextNullException {
+        employeeService.update(cpf, employeeUpdate);
         return ResponseEntity.ok("Funcionário atualizado com sucesso");
     }
 
     @PostMapping("delete/{cpf}")
-    public ResponseEntity<?> delete(@PathVariable String cpf) {
+    public ResponseEntity<?> delete(@PathVariable String cpf) throws ContextNullException {
         employeeService.delete(cpf);
         return ResponseEntity.ok(String.format("Funcionário com o cpf de: %s excluído com sucesso", cpf));
     }
