@@ -5,7 +5,6 @@ import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullExc
 import finunsize.finunsizeapi.business.dto.employee.main.EmployeeCreate;
 import finunsize.finunsizeapi.business.dto.employee.main.EmployeeResponse;
 import finunsize.finunsizeapi.business.dto.employee.main.EmployeeUpdate;
-import finunsize.finunsizeapi.business.service.address.Address;
 import finunsize.finunsizeapi.business.service.address.AddressService;
 import finunsize.finunsizeapi.integration.auth.UserSession;
 import finunsize.finunsizeapi.persistence.model.address.AddressModel;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,8 +49,8 @@ public class Employee implements EmployeeService {
     }
 
     @Override
-    public EmployeeResponse find(String cpf) {
-        var employee = employeeRepository.findByCpf(cpf)
+    public EmployeeResponse find(String cpf) throws ContextNullException {
+        var employee = employeeRepository.findByCpfAndCnpj(cpf, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Funcionário com o cpf: %s, não encontrado", cpf)));
         return new EmployeeResponse(employee);
     }
@@ -69,19 +67,18 @@ public class Employee implements EmployeeService {
 
     @Transactional
     @Override
-    public EmployeeModel update(String cpf, UUID id_logradouro, @Valid EmployeeUpdate employeeUpdate) {
-        var employee = employeeRepository.findByCpf(cpf)
+    public EmployeeModel update(String cpf,  @Valid EmployeeUpdate employeeUpdate) throws ContextNullException {
+        var employee = employeeRepository.findByCpfAndCnpj(cpf, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Funcionário com o cpf de: %s não foi encontrado", cpf)));
-        valid(employeeUpdate.cpf());
-        BeanUtils.copyProperties(employeeUpdate, employee, "id_funcionario");
-        addressService.update(id_logradouro, employeeUpdate.addressUpdate());
+        BeanUtils.copyProperties(employeeUpdate, employee, "id_funcionario", "cpf");
+        addressService.update(employee.getId_logradouro().getId_logradouro(), employeeUpdate.endereco());
         return employeeRepository.save(employee);
     }
 
     @Transactional
     @Override
-    public void delete(String cpf) {
-        var employee = employeeRepository.findByCpf(cpf)
+    public void delete(String cpf) throws ContextNullException {
+        var employee = employeeRepository.findByCpfAndCnpj(cpf, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Funcionário com o cpf de: %s não foi encontrado", cpf)));
         employee.setDemitido(true);
         employeeRepository.save(employee);
