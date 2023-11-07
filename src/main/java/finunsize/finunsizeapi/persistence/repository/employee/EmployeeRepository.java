@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface EmployeeRepository extends JpaRepository <EmployeeModel, Integer> {
     List<EmployeeModel> findAllByCnpjAndDemitidoIsFalse(String cnpj);
-    Optional<EmployeeModel> findByCpf(String cpf);
+    Optional<EmployeeModel> findByCpfAndCnpj(String cpf, String cnpj);
     boolean existsByCpf(String cpf);
 }
