@@ -47,7 +47,7 @@ public class UserSession {
             return planUserModel.getCompany().getCnpj();
         }
 
-        return "CNPJ not founded";
+        return null;
     }
 
     public UUID getUUID() throws ContextNullException {
