@@ -50,7 +50,7 @@ public class Employee implements EmployeeService {
 
     @Override
     public EmployeeResponse find(String cpf) throws ContextNullException {
-        var employee = employeeRepository.findByCpfAndCnpj(cpf, cnpj())
+        var employee = employeeRepository.findByCpfAndCnpjAndDemitidoIsFalse(cpf, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Funcionário com o cpf: %s, não encontrado", cpf)));
         return new EmployeeResponse(employee);
     }
@@ -68,7 +68,7 @@ public class Employee implements EmployeeService {
     @Transactional
     @Override
     public EmployeeModel update(String cpf,  @Valid EmployeeUpdate employeeUpdate) throws ContextNullException {
-        var employee = employeeRepository.findByCpfAndCnpj(cpf, cnpj())
+        var employee = employeeRepository.findByCpfAndCnpjAndDemitidoIsFalse(cpf, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Funcionário com o cpf de: %s não foi encontrado", cpf)));
         BeanUtils.copyProperties(employeeUpdate, employee, "id_funcionario", "cpf");
         addressService.update(employee.getId_logradouro().getId_logradouro(), employeeUpdate.endereco());
@@ -78,18 +78,18 @@ public class Employee implements EmployeeService {
     @Transactional
     @Override
     public void delete(String cpf) throws ContextNullException {
-        var employee = employeeRepository.findByCpfAndCnpj(cpf, cnpj())
+        var employee = employeeRepository.findByCpfAndCnpjAndDemitidoIsFalse(cpf, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Funcionário com o cpf de: %s não foi encontrado", cpf)));
         employee.setDemitido(true);
         employeeRepository.save(employee);
     }
 
-    public void insertFk(EmployeeModel employeeModel, String office, AddressModel address) throws ContextNullException {
-        String cnpj = userSession.getSessionCnpj();
-        var offices = officeRepository.findByNome(office);
+    private void insertFk(EmployeeModel employeeModel, String office, AddressModel address) throws ContextNullException {
+        var offices = officeRepository.findIdByNomeAndCnpj(office, cnpj())
+                .orElseThrow(()-> new EntityNotFoundException(String.format("O cargo: %s não existe", office)));
         employeeModel.setCargo(offices);
         employeeModel.setId_logradouro(address);
-        employeeModel.setCnpj(cnpj);
+        employeeModel.setCnpj(cnpj());
     }
 
     public String cnpj() throws ContextNullException {

@@ -1,9 +1,17 @@
 package finunsize.finunsizeapi.business.service.employee;
 
+import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullException;
+import finunsize.finunsizeapi.business.dto.employee.office.OfficeCreate;
+import finunsize.finunsizeapi.business.dto.employee.office.OfficeResponse;
 import finunsize.finunsizeapi.persistence.model.employee.OfficeModel;
 
+import java.util.List;
+import java.util.UUID;
+
 public interface OfficeService {
-    OfficeModel create(OfficeModel officeModel);
-    OfficeModel update(OfficeModel officeModel);
-    void delete();
+    OfficeModel create(OfficeCreate officeCreate) throws ContextNullException;
+    OfficeResponse find(String name) throws ContextNullException;
+    List<OfficeResponse> list() throws ContextNullException;
+    OfficeModel update(UUID id, OfficeCreate officeCreate);
+    void delete(UUID id);
 }
