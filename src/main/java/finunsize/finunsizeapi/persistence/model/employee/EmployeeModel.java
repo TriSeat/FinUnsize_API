@@ -22,7 +22,8 @@ public class EmployeeModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_funcionario;
+    @Column(name = "id_funcionario")
+    private int idFuncionario;
 
     @Column(nullable = false, unique = true, columnDefinition = "CHAR(14)")
     private String cpf;

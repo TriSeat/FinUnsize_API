@@ -20,7 +20,8 @@ public class PaymentModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id_pagamento;
+    @Column(name = "id_pagamento")
+    private UUID idPagamento;
 
     @Column(nullable = false, length = 70)
     private String nome;

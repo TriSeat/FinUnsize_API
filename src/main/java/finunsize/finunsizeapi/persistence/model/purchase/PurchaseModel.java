@@ -27,7 +27,8 @@ public class PurchaseModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id_compra;
+    @Column(name = "id_compra")
+    private UUID idCompra;
 
     @Column(nullable = false, length = 50)
     private String nome;

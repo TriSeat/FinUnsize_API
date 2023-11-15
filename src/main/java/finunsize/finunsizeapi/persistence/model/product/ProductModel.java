@@ -20,7 +20,8 @@ public class ProductModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private String cod_barras;
+    @Column(name = "cod_barras")
+    private String codBarras;
 
     @Column(nullable = false, length = 50)
     private String nome;

@@ -20,7 +20,8 @@ public class InfoProductModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id_item_produto;
+    @Column(name = "id_item_produto")
+    private UUID idItemProduto;
 
     @Column(nullable = false, length = 90)
     private String marca;

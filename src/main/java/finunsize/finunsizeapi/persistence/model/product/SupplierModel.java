@@ -21,7 +21,8 @@ public class SupplierModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id_fornecedor;
+    @Column(name = "id_fornecedor")
+    private UUID idFornecedor;
 
     @Column(nullable = false, length = 90)
     private String nome;

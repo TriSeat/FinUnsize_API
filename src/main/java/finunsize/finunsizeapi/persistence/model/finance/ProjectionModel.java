@@ -22,7 +22,8 @@ public class ProjectionModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id_projecao;
+    @Column(name = "id_projecao")
+    private UUID idProjecao;
 
     @Column(nullable = false)
     private BigDecimal saldo_liquido;

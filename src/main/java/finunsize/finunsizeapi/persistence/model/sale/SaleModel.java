@@ -27,7 +27,8 @@ public class SaleModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id_venda;
+    @Column(name = "id_venda")
+    private UUID idVenda;
 
     @ManyToOne
     @JoinColumn(name = "id_caixa", nullable = false)

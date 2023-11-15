@@ -20,13 +20,14 @@ public class TypeExpanseModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id_despesa;
+    @Column(name = "id_despesa")
+    private UUID idDespesa;
 
     @Column(nullable = false)
     private String nome;
 
     @Column(length = 150)
-    private String descicao;
+    private String descricao;
 
     @Column(nullable = false, length = 18, columnDefinition = "CHAR(18)")
     private String cnpj;

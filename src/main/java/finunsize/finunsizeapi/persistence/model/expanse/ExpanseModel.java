@@ -22,7 +22,8 @@ public class ExpanseModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id_despesa;
+    @Column(name = "id_despesa")
+    private UUID idDespesa;
 
     @Column(nullable = false, length = 100)
     private String nome;
@@ -31,12 +32,10 @@ public class ExpanseModel implements Serializable {
     private BigDecimal valor;
 
     private LocalDate data_vencimento;
-
-
     private LocalDate data_pagamento;
 
     @ManyToOne (optional = false)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "tipo_despesa")
     private TypeExpanseModel tipo_despesa;
 
     @Column(length = 150)

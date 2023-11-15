@@ -19,7 +19,8 @@ public class OfficeModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id_cargo;
+    @Column(name = "id_cargo")
+    private UUID idCargo;
 
     @Column(nullable = false, length = 50)
     private String nome;
