@@ -1,18 +1,29 @@
 package finunsize.finunsizeapi.business.dto.expanse.main;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import org.springframework.format.annotation.DateTimeFormat;
+import finunsize.finunsizeapi.persistence.model.expanse.ExpanseModel;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.UUID;
 
 public record ExpanseResponse(
-        @NotBlank @Size(max = 100) String nome,
+        UUID id_depesa,
+        String nome,
         BigDecimal valor,
-        @NotBlank @DateTimeFormat(pattern = "dd-MM-yyy") LocalDateTime data_vencimento,
-        @NotBlank @DateTimeFormat(pattern = "dd-MM-yyy") LocalDateTime data_pagamento,
-        @NotBlank String tipo_despesa,
-        @NotBlank @Size(max=150) String oservacao,
-        @NotBlank boolean aberto
-) {}
+        LocalDate data_vencimento,
+        LocalDate data_pagamento,
+        String tipo_despesa,
+        String oservacao,
+        boolean aberto
+) {
+    public ExpanseResponse(ExpanseModel expanse) {
+        this(expanse.getIdDespesa(),
+                expanse.getNome(),
+                expanse.getValor(),
+                expanse.getData_vencimento(),
+                expanse.getData_pagamento(),
+                expanse.getTipo_despesa().getNome(),
+                expanse.getObservacao(),
+                expanse.isAberto());
+    }
+}

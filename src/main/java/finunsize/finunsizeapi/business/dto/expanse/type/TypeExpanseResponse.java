@@ -1,9 +1,17 @@
-package finunsize.finunsizeapi.business.dto.expanse;
+package finunsize.finunsizeapi.business.dto.expanse.type;
 
+import finunsize.finunsizeapi.persistence.model.expanse.TypeExpanseModel;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.UUID;
+
 public record TypeExpanseResponse(
-   @NotBlank @Size(max = 50) String nome,
-   @NotBlank @Size(max = 150) String descricao
-) {}
+   UUID id_despesa,     
+   String nome,
+   String descricao
+) {
+    public TypeExpanseResponse(TypeExpanseModel typeExpanseModel) {
+        this(typeExpanseModel.getIdDespesa(), typeExpanseModel.getNome(), typeExpanseModel.getDescricao());
+    }
+}
