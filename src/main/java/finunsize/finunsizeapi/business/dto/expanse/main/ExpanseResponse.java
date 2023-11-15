@@ -1,4 +1,4 @@
-package finunsize.finunsizeapi.business.dto.expanse;
+package finunsize.finunsizeapi.business.dto.expanse.main;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

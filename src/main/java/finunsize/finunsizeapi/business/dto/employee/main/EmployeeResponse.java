@@ -21,7 +21,7 @@ public record EmployeeResponse(
         String url_image
 ) {
     public EmployeeResponse(EmployeeModel employee) {
-        this(employee.getId_funcionario(), employee.getCpf(), employee.getNome(),
+        this(employee.getIdFuncionario(), employee.getCpf(), employee.getNome(),
                 employee.getCargo().getNome(),
                 employee.getTurno(), employee.getTelefone(), LocalDate.from(employee.getAdmissao()),
                 new AddressResponse(
