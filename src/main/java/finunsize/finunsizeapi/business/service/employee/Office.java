@@ -1,7 +1,6 @@
 package finunsize.finunsizeapi.business.service.employee;
 
 import finunsize.finunsizeapi.business.configuration.handler.EntityAlreadyExistsException;
-import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullException;
 import finunsize.finunsizeapi.business.dto.employee.office.OfficeCreate;
 import finunsize.finunsizeapi.business.dto.employee.office.OfficeResponse;
 import finunsize.finunsizeapi.integration.auth.UserSession;
@@ -30,7 +29,7 @@ public class Office implements OfficeService {
 
     @Transactional
     @Override
-    public OfficeModel create(@Valid OfficeCreate officeCreate) throws ContextNullException {
+    public OfficeModel create(@Valid OfficeCreate officeCreate) {
         OfficeModel officeModel = new OfficeModel();
         valid(officeCreate.nome());
         BeanUtils.copyProperties(officeCreate, officeModel, "id_cargo");
@@ -39,14 +38,14 @@ public class Office implements OfficeService {
     }
 
     @Override
-    public OfficeResponse find(String name) throws ContextNullException {
+    public OfficeResponse find(String name) {
         var office = officeRepository.findByNomeAndCnpj(name, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("O cargo %s não existe", name)));
         return new OfficeResponse(office);
     }
 
     @Override
-    public List<OfficeResponse> list() throws ContextNullException {
+    public List<OfficeResponse> list() {
         var office = officeRepository.findAllByCnpj(cnpj());
         List<OfficeResponse> response = office
                 .stream()
@@ -72,12 +71,12 @@ public class Office implements OfficeService {
         officeRepository.delete(office);
     }
 
-    void valid(String nome) throws ContextNullException {
+    void valid(String nome) {
         if (officeRepository.existsByNomeAndCnpj(nome, cnpj()))
             throw new EntityAlreadyExistsException(String.format("O cargo %s já está cadastrado", nome));
     }
 
-    public String cnpj() throws ContextNullException {
+    public String cnpj() {
         return userSession.getSessionCnpj();
     }
 }

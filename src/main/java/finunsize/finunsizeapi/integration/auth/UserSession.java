@@ -20,26 +20,26 @@ public class UserSession {
         this.companyRepository = companyRepository;
     }
 
-    private Authentication getAuthentication() throws ContextNullException {
+    private Authentication getAuthentication() {
         SecurityContext context = SecurityContextHolder.getContext();
         if (context != null) {
             return context.getAuthentication();
         }
-        throw new ContextNullException("The Context is null");
+        return null;
     }
 
-    public String getCurrentUsername() throws ContextNullException {
+    public String getCurrentUsername()  {
         Authentication auth = getAuthentication();
         return auth.getName();
     }
 
-    public String getCurrentLogin() throws ContextNullException {
+    public String getCurrentLogin() {
         Authentication auth = getAuthentication();
         UserModel userModel = (UserModel) auth.getPrincipal();
         return userModel.getLogin();
     }
 
-    public String getSessionCnpj() throws ContextNullException {
+    public String getSessionCnpj() {
         Authentication auth = getAuthentication();
 
         if (auth.getPrincipal() instanceof UserModel) {
@@ -50,7 +50,7 @@ public class UserSession {
         return null;
     }
 
-    public UUID getUUID() throws ContextNullException {
+    public UUID getUUID() {
         Authentication auth = getAuthentication();
 
         if (auth.getPrincipal() instanceof UserModel) {

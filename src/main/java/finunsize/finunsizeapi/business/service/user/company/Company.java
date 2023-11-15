@@ -1,6 +1,5 @@
 package finunsize.finunsizeapi.business.service.user.company;
 
-import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullException;
 import finunsize.finunsizeapi.business.dto.user.company.CompanyCreate;
 import finunsize.finunsizeapi.business.dto.user.company.CompanyResponse;
 import finunsize.finunsizeapi.business.dto.user.company.CompanyUpdate;
@@ -37,7 +36,7 @@ public class Company implements CompanyService {
     }
 
     @Override
-    public CompanyResponse find() throws ContextNullException {
+    public CompanyResponse find() {
         var cnpj = getCnpj();
         var company = companyRepository.findByCnpj(cnpj)
                 .orElseThrow(() -> new RuntimeException("Empresa não encontrada ou excluída"));
@@ -46,7 +45,7 @@ public class Company implements CompanyService {
 
     @Transactional
     @Override
-    public CompanyModel update(@Valid CompanyUpdate companyUpdate) throws ContextNullException {
+    public CompanyModel update(@Valid CompanyUpdate companyUpdate) {
         var cnpj = getCnpj();
         var company = companyRepository.findByCnpj(cnpj)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Empresa com o cnpj de %s não contém um cadastro", cnpj)));
@@ -55,7 +54,7 @@ public class Company implements CompanyService {
         return companyRepository.save(company);
     }
 
-    private String getCnpj() throws ContextNullException {
+    private String getCnpj() {
         String cnpj = userSession.getSessionCnpj();
         return cnpj;
     }

@@ -1,7 +1,6 @@
 package finunsize.finunsizeapi.business.service.expanse.main;
 
 import finunsize.finunsizeapi.business.configuration.handler.EntityAlreadyExistsException;
-import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullException;
 import finunsize.finunsizeapi.business.dto.expanse.main.ExpanseCreate;
 import finunsize.finunsizeapi.business.dto.expanse.main.ExpanseResponse;
 import finunsize.finunsizeapi.integration.auth.UserSession;
@@ -35,7 +34,7 @@ public class Expanse implements ExpanseService {
 
     @Transactional
     @Override
-    public ExpanseModel create(@Valid ExpanseCreate expanseCreate) throws ContextNullException {
+    public ExpanseModel create(@Valid ExpanseCreate expanseCreate) {
         ExpanseModel expanseModel = new ExpanseModel();
         valid(expanseCreate.nome());
         BeanUtils.copyProperties(expanseCreate, expanseModel, "id_despesa");
@@ -45,14 +44,14 @@ public class Expanse implements ExpanseService {
     }
 
     @Override
-    public ExpanseResponse find(String name) throws ContextNullException {
+    public ExpanseResponse find(String name) {
         var expanse = expanseRepository.findByNomeAndCnpj(name, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("A depesa %s, não está cadastrada", name)));
         return new ExpanseResponse(expanse);
     }
 
     @Override
-    public List<ExpanseResponse> list() throws ContextNullException {
+    public List<ExpanseResponse> list() {
         var expanse = expanseRepository.findAllByCnpj(cnpj());
         List<ExpanseResponse> response = expanse
                 .stream()
@@ -63,7 +62,7 @@ public class Expanse implements ExpanseService {
 
     @Transactional
     @Override
-    public ExpanseModel update(UUID id, @Valid ExpanseCreate expanseCreate) throws ContextNullException {
+    public ExpanseModel update(UUID id, @Valid ExpanseCreate expanseCreate) {
         var expanse = expanseRepository.findByIdDespesaAndCnpj(id, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Despesa %s não foi encontrada", id.toString())));
         validUpdate(id, expanseCreate.nome());
@@ -73,23 +72,23 @@ public class Expanse implements ExpanseService {
 
     @Transactional
     @Override
-    public void delete(UUID id) throws ContextNullException {
+    public void delete(UUID id) {
         var expanse = expanseRepository.findByIdDespesaAndCnpj(id, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Despesa %s não foi encontrada", id.toString())));
         expanseRepository.delete(expanse);
     }
 
-    private void insertFk(ExpanseModel expanseModel, String name) throws ContextNullException {
+    private void insertFk(ExpanseModel expanseModel, String name) {
         var type = typeExpanseRepository.findIdByNomeAndCnpj(name, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("O tipo da despesa %s, não foi econtrado", name)));
         expanseModel.setTipo_despesa(type);
     }
 
-    public String cnpj() throws ContextNullException {
+    public String cnpj() {
         return userSession.getSessionCnpj();
     }
 
-    private void valid(String name) throws ContextNullException {
+    private void valid(String name) {
         if(expanseRepository.existsByNomeAndCnpj(name, cnpj()))
             throw new EntityAlreadyExistsException(String.format("A despesa %s, já foi cadastrada", name));
     }

@@ -1,6 +1,5 @@
 package finunsize.finunsizeapi.response.controller.expanse;
 
-import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullException;
 import finunsize.finunsizeapi.business.dto.expanse.main.ExpanseCreate;
 import finunsize.finunsizeapi.business.dto.expanse.main.ExpanseResponse;
 import finunsize.finunsizeapi.business.service.expanse.main.ExpanseService;
@@ -24,29 +23,29 @@ public class ExpanseController {
     }
 
     @PostMapping("create")
-    public ResponseEntity create(@RequestBody @Valid ExpanseCreate expanseCreate) throws ContextNullException {
+    public ResponseEntity create(@RequestBody @Valid ExpanseCreate expanseCreate) {
         expanseService.create(expanseCreate);
         return ResponseEntity.status(HttpStatus.CREATED).body("Despesa cadastrada com sucesso");
     }
 
     @GetMapping("find/{name}")
-    public ResponseEntity<ExpanseResponse> find(@PathVariable String name) throws ContextNullException {
+    public ResponseEntity<ExpanseResponse> find(@PathVariable String name) {
         return ResponseEntity.ok(expanseService.find(name));
     }
 
     @GetMapping("list")
-    public ResponseEntity<List<ExpanseResponse>> list() throws ContextNullException {
+    public ResponseEntity<List<ExpanseResponse>> list() {
         return ResponseEntity.ok(expanseService.list());
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity update(@PathVariable UUID id, @RequestBody ExpanseCreate expanseCreate) throws ContextNullException {
+    public ResponseEntity update(@PathVariable UUID id, @RequestBody ExpanseCreate expanseCreate) {
         expanseService.update(id, expanseCreate);
         return ResponseEntity.ok(String.format("Despesa %s atualizada com sucesso", id.toString()));
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity delete(@PathVariable UUID id) throws ContextNullException {
+    public ResponseEntity delete(@PathVariable UUID id) {
         expanseService.delete(id);
         return ResponseEntity.ok(String.format("Despesa %s excluída com sucesso", id.toString()));
     }

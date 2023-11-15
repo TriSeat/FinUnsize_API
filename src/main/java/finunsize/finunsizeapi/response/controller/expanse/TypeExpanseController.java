@@ -1,6 +1,5 @@
 package finunsize.finunsizeapi.response.controller.expanse;
 
-import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullException;
 import finunsize.finunsizeapi.business.dto.expanse.type.TypeExpanseCreate;
 import finunsize.finunsizeapi.business.dto.expanse.type.TypeExpanseResponse;
 import finunsize.finunsizeapi.business.service.expanse.TypeExpanseService;
@@ -23,29 +22,29 @@ public class TypeExpanseController {
     }
 
     @PostMapping("create")
-    public ResponseEntity create(@RequestBody @Valid TypeExpanseCreate typeExpanseCreate) throws ContextNullException {
+    public ResponseEntity create(@RequestBody @Valid TypeExpanseCreate typeExpanseCreate) {
         typeExpanseService.create(typeExpanseCreate);
         return ResponseEntity.status(HttpStatus.CREATED).body("Tipo de despesa criada com sucesso");
     }
 
     @GetMapping("find/{name}")
-    public ResponseEntity<TypeExpanseResponse> find(@PathVariable String name) throws ContextNullException {
+    public ResponseEntity<TypeExpanseResponse> find(@PathVariable String name) {
         return ResponseEntity.ok(typeExpanseService.find(name));
     }
 
     @GetMapping("list")
-    public ResponseEntity<List<TypeExpanseResponse>> list() throws ContextNullException {
+    public ResponseEntity<List<TypeExpanseResponse>> list() {
         return ResponseEntity.ok(typeExpanseService.list());
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity update(@PathVariable UUID id, @RequestBody @Valid TypeExpanseCreate typeExpanseCreate) throws ContextNullException {
+    public ResponseEntity update(@PathVariable UUID id, @RequestBody @Valid TypeExpanseCreate typeExpanseCreate) {
         typeExpanseService.update(id, typeExpanseCreate);
         return ResponseEntity.ok("Tipo de despesa atualizada com sucesso");
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity delete(@PathVariable UUID id) throws ContextNullException {
+    public ResponseEntity delete(@PathVariable UUID id) {
         typeExpanseService.delete(id);
         return ResponseEntity.ok("Tipo de despesa excluída com sucesso");
     }

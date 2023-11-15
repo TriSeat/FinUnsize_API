@@ -23,18 +23,18 @@ public class OfficeController {
     }
 
     @PostMapping("create")
-    public ResponseEntity create(@RequestBody @Valid OfficeCreate officeCreate) throws ContextNullException {
+    public ResponseEntity create(@RequestBody @Valid OfficeCreate officeCreate) {
         officeService.create(officeCreate);
         return ResponseEntity.status(HttpStatus.CREATED).body("Cargo criado com sucesso");
     }
 
     @GetMapping("find/{name}")
-    public ResponseEntity<OfficeResponse> find(@PathVariable String name) throws ContextNullException {
+    public ResponseEntity<OfficeResponse> find(@PathVariable String name) {
         return ResponseEntity.ok(officeService.find(name));
     }
 
     @GetMapping("list")
-    public ResponseEntity<List<OfficeResponse>> list() throws ContextNullException {
+    public ResponseEntity<List<OfficeResponse>> list() {
         return ResponseEntity.ok(officeService.list());
     }
 

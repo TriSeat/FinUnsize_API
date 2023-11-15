@@ -1,7 +1,6 @@
 package finunsize.finunsizeapi.business.service.expanse;
 
 import finunsize.finunsizeapi.business.configuration.handler.EntityAlreadyExistsException;
-import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullException;
 import finunsize.finunsizeapi.business.dto.expanse.type.TypeExpanseCreate;
 import finunsize.finunsizeapi.business.dto.expanse.type.TypeExpanseResponse;
 import finunsize.finunsizeapi.integration.auth.UserSession;
@@ -30,7 +29,7 @@ public class TypeExpanse implements TypeExpanseService {
 
     @Transactional
     @Override
-    public TypeExpanseModel create(TypeExpanseCreate typeExpanseCreate) throws ContextNullException {
+    public TypeExpanseModel create(TypeExpanseCreate typeExpanseCreate) {
         TypeExpanseModel typeExpanseModel = new TypeExpanseModel();
         BeanUtils.copyProperties(typeExpanseCreate, typeExpanseModel, "id_despesa");
         valid(typeExpanseCreate.nome());
@@ -39,14 +38,14 @@ public class TypeExpanse implements TypeExpanseService {
     }
 
     @Override
-    public TypeExpanseResponse find(String name) throws ContextNullException {
+    public TypeExpanseResponse find(String name) {
        var type = typeExpanseRepository.findByNomeAndCnpj(name, cnpj())
                .orElseThrow(() -> new EntityNotFoundException(String.format("O tipo %s não foi encontrado", name)));
        return new TypeExpanseResponse(type);
     }
 
     @Override
-    public List<TypeExpanseResponse> list() throws ContextNullException {
+    public List<TypeExpanseResponse> list() {
         var type = typeExpanseRepository.findByCnpj(cnpj());
         List<TypeExpanseResponse> response = type
                 .stream()
@@ -57,7 +56,7 @@ public class TypeExpanse implements TypeExpanseService {
 
     @Transactional
     @Override
-    public TypeExpanseModel update(UUID id, @Valid TypeExpanseCreate typeExpanseCreate) throws ContextNullException {
+    public TypeExpanseModel update(UUID id, @Valid TypeExpanseCreate typeExpanseCreate) {
         var type = typeExpanseRepository.findByIdDespesaAndCnpj(id, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("o tipo com o id %s não foi encontrado", id.toString())));
         validUpdate(typeExpanseCreate.nome(), id);
@@ -67,13 +66,13 @@ public class TypeExpanse implements TypeExpanseService {
 
     @Transactional
     @Override
-    public void delete(UUID id) throws ContextNullException {
+    public void delete(UUID id) {
         var type = typeExpanseRepository.findByIdDespesaAndCnpj(id, cnpj())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("o tipo com o id %s não foi encontrado", id.toString())));
         typeExpanseRepository.delete(type);
     }
 
-    private void valid(String name) throws ContextNullException {
+    private void valid(String name) {
         if(typeExpanseRepository.existsByNomeAndCnpj(name, cnpj())) {
             throw new EntityAlreadyExistsException(String.format("O tipo de despesa %s, já está cadastrado", name));
         }
@@ -84,7 +83,7 @@ public class TypeExpanse implements TypeExpanseService {
             throw new EntityAlreadyExistsException(String.format("O tipo de despesa %s, já está cadastrado", name));
     }
 
-    private String cnpj() throws ContextNullException {
+    private String cnpj() {
         return userSession.getSessionCnpj();
     }
 }

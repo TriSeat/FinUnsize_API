@@ -1,6 +1,5 @@
 package finunsize.finunsizeapi.business.service.user.main;
 
-import finunsize.finunsizeapi.business.configuration.handler.user.ContextNullException;
 import finunsize.finunsizeapi.business.configuration.handler.EntityAlreadyExistsException;
 import finunsize.finunsizeapi.business.dto.user.main.UserResponse;
 import finunsize.finunsizeapi.business.dto.user.main.UserSign;
@@ -59,14 +58,14 @@ public class User implements UserDetailsService, UserService {
     }
 
     @Override
-    public UserResponse findLogin() throws ContextNullException {
+    public UserResponse findLogin() {
         String login = userSession.getCurrentLogin();
         var user = userRepository.findByLogin(login);
         return new UserResponse((UserModel) user);
     }
 
     @Override
-    public UserResponse findUser(String username) throws ContextNullException {
+    public UserResponse findUser(String username) {
         var cnpj = userSession.getSessionCnpj();
         var user = userRepository.findByNomeAndCnpj_Cnpj(username, cnpj)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário foi encontrado"));
@@ -74,7 +73,7 @@ public class User implements UserDetailsService, UserService {
     }
 
     @Override
-    public List<UserResponse> listUser() throws ContextNullException {
+    public List<UserResponse> listUser() {
         String cnpj = userSession.getSessionCnpj();
         List<UserModel> users = userRepository.findAllByCnpj_Cnpj(cnpj);
         List<UserResponse> response = users
