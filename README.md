@@ -115,12 +115,12 @@ Endpoint: https://finunsize.onrender.com/employee/
 	"telefone": ,
 	"admissao": "",
 	"endereco": {
-	"cep": "",
-    "rua": "",
-    "numero": "",
-    "complemento": "",
-    "referencia": "",
-    "cidade": ""
+	  "cep": "",
+      "rua": "",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "cidade": ""
 	},
 	"salario": ,
 	"observacao": "",
@@ -138,15 +138,119 @@ Endpoint: https://finunsize.onrender.com/employee/
 	"telefone": ,
 	"admissao": "",
 	"endereco": {
-	"cep": "",
+	  "cep": "",
+    " rua": "",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "cidade": ""
+	},
+	"salario": ,
+	"observacao": "",
+	"url_image": ""
+}
+```
+
+## Supplier
+
+Endpoint: https://finunsize.onrender.com/supplier/
+
+- create;
+- find/{id};
+- search/{name}
+- list;
+- update/{id};
+- delete/{id};
+
+**Create**
+
+```JSON
+
+{
+	"nome": "",
+	"endereco": {
+      "cep": "",
+      "rua": "",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "cidade": ""
+	},
+	"descricao": "",
+	"url_image": ""
+}
+
+```
+
+**Update**
+
+```JSON
+
+{
+  "nome": "",
+  "endereco": {
+    "cep": ,
     "rua": "",
     "numero": "",
     "complemento": "",
     "referencia": "",
     "cidade": ""
+  },
+  "descricao": "",
+  "url_image": ""
+}
+```
+
+## Product
+
+Endpoint: https://finunsize.onrender.com/product/
+
+- create;
+- find/{barras};
+- search/{name}
+- list;
+- update/{barras};
+- delete/{barras};
+
+**Create**
+
+```JSON
+
+{
+	"cod_barras": "",
+	"nome": "",
+	"quantidade": ,
+	"informacoes": {
+		"marca": "",
+		"categoria": "",
+		"tipo": ""
 	},
-	"salario": ,
-	"observacao": "",
-	"url_image": ""
+	"fornecedor": "",
+	"validade": "",
+	"descricao": "",
+	"varejo": ,
+	"atacado": ,
+	"url_image" : ""
+}
+```
+
+**Update**
+
+```JSON
+{
+	"cod_barras": "",
+	"nome": "",
+	"quantidade": ,
+	"informacoes": {
+		"marca": "",
+		"categoria": "",
+		"tipo": ""
+	},
+	"fornecedor": "",
+	"validade": "",
+	"descricao": "",
+	"varejo": ,
+	"atacado": ,
+	"url_image" : ""
 }
 ```
