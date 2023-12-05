@@ -11,5 +11,4 @@ public interface AddressService {
     AddressModel create(AddressCreate addressCreate);
     AddressModel update(UUID id, AddressUpdate addressUpdate);
     void delete();
-
 }

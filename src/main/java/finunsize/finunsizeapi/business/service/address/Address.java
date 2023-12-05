@@ -22,7 +22,7 @@ public class Address implements AddressService {
 
     @Override
     public AddressModel create(@Valid AddressCreate addressCreate) {
-        AddressModel addressModel = new AddressModel();
+        var addressModel = new AddressModel();
         BeanUtils.copyProperties(addressCreate, addressModel, "id_logradouro");
         return addressRepository.save(addressModel);
     }

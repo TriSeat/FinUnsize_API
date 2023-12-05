@@ -33,6 +33,10 @@ public class ProductModel implements Serializable {
     @JoinColumn(name = "id_item_produto")
     private InfoProductModel informacoes;
 
+    @ManyToOne (optional = true)
+    @JoinColumn(name = "id_fornecedor")
+    private SupplierModel fornecedor;
+
     @Column(nullable = false)
     private LocalDate validade;
 
