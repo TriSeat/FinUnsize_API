@@ -255,6 +255,16 @@ cd target
 java -jar nome-do-arquivo.jar
 ```
 
+5. Alterar porta de funcionamento (OPCIONAL)
+
+Se você precisar configurar uma porta diferente, você pode fazer isso passando a opção -Dserver.port ao executar o JAR da aplicação:
+```BASH
+java -jar -Dserver.port=PORTA_DESEJADA seu-projeto.jar
+```
+
+- A aplicação por padrão irá iniciar na porta 8080
+http://localhost:8080
+
 # Documentação dos EndPoints
 
 > Endpoints testados
