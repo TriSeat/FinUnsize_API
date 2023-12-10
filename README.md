@@ -13,6 +13,7 @@ Certifique-se de que você possui os seguintes pré-requisitos instalados antes 
 
 - Java 17 SDK: [Instalação do Java 17](https://www.oracle.com/java/technologies/downloads/)
 - Spring Boot 3.2.0: Adicionado automaticamente pelo gerenciador de dependências do projeto.
+- Maven: [Instação do Maven](https://maven.apache.org/download.cgi)
 - Docker: [Instalação do Docker](https://docs.docker.com/get-docker/)
 - Docker Compose: [Instalação do Docker Compose](https://docs.docker.com/compose/install/)
 
