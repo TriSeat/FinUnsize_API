@@ -149,7 +149,7 @@ Siga as instruções fornecidas em [Instalação do Docker no Linux](https://doc
 2. Docker Compose:
 Siga as instruções fornecidas em [Instalação do Docker Compose no Linux](https://docs.docker.com/desktop/install/linux-install/#install-compose).
 
-> Para mais informações de sua utilização no spring boot, [vide o site oficial](https://spring.io/blog/2023/06/21/docker-compose-support-in-spring-boot-3-1)
+- Para mais informações de sua utilização no spring boot, [vide o site oficial](https://spring.io/blog/2023/06/21/docker-compose-support-in-spring-boot-3-1)
 
 ## Passo 4: Execução do Docker Compose (Opcional)
 
